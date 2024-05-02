@@ -41,7 +41,7 @@ if genre == 'Text':
             st.warning("Please input text for SHA1 hash to work!")
 
 elif genre == 'File':
-    st.write('You selected File.')
+    st.write('You elected File.')
     uploaded_file = st.file_uploader("Choose a file")
     if uploaded_file is not None:
         # Read file contents as string
