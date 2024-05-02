@@ -18,7 +18,7 @@ def compute_sha1(input_string):
     return hex_digest
 
 genre = st.radio(
-    "Choose Input",
+    "Choose Input:",
     ["Text", "File"])
 
 if genre == 'Text':
