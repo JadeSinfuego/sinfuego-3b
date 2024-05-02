@@ -38,9 +38,9 @@ if genre == 'Text':
         if input_string:  # Check if input_string is not empty
             st.write("Input Text:", input_string)
             md5_hash = compute_md5(input_string)
-            st.write("SHA1 hash of '{}' is: {}".format(input_string, sha1_hash))
+            st.write("MD5 hash of '{}' is: {}".format(input_string, md5_hash))
         else:
-            st.warning("Please input text for SHA1 hash to work!")
+            st.warning("Please input text for MD5 hash to work!")
 
 elif genre == 'File':
     st.write('Enter Your Selected File.')
@@ -50,9 +50,9 @@ elif genre == 'File':
         file_contents = uploaded_file.getvalue().decode("utf-8")
         st.write("File contents:", file_contents)
 
-        # Compute SHA1 hash of file contents
+        # Compute MD5 hash of file contents
         md5_hash = compute_md5(file_contents)
-        st.write("SHA1 hash of file contents:", md5_hash)
+        st.write("MD5 hash of file contents:", md5_hash)
         
 else:
     st.write("Please choose.")

@@ -38,9 +38,9 @@ if genre == 'Text':
         if input_string:  # Check if input_string is not empty
             st.write("Input Text:", input_string)
             sha512_hash = compute_sha512(input_string)
-            st.write("SHA512 hash of '{}' is: {}".format(input_string, sha512_hash))
+            st.write("SHA-512 hash of '{}' is: {}".format(input_string, sha512_hash))
         else:
-            st.warning("Please input text for SHA1 hash to work!")
+            st.warning("Please input text for SHA-512 hash to work!")
 
 elif genre == 'File':
     st.write('Enter Your Selected File.')
@@ -50,9 +50,9 @@ elif genre == 'File':
         file_contents = uploaded_file.getvalue().decode("utf-8")
         st.write("File contents:", file_contents)
 
-        # Compute SHA1 hash of file contents
+        # Compute SHA-512 hash of file contents
         sha512_hash = compute_sha512(file_contents)
-        st.write("SHA1 hash of file contents:", sha512_hash)
+        st.write("SHA-512 hash of file contents:", sha512_hash)
         
 else:
     st.write("Please choose.")
