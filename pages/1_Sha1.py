@@ -17,12 +17,6 @@ def compute_sha1(input_string):
 
     return hex_digest
 
-option = st.selectbox(
-    'Please choose content type',
-    ('Text', 'File'))
-
-st.write('You selected:', option)
-
 genre = st.radio(
     "Choose Input",
     ["Text", "File"])
@@ -41,7 +35,7 @@ if genre == 'Text':
             st.warning("Please input text for SHA1 hash to work!")
 
 elif genre == 'File':
-    st.write('You selected File.')
+    st.write('Enter Your Selected File.')
     uploaded_file = st.file_uploader("Choose a file")
     if uploaded_file is not None:
         # Read file contents as string
