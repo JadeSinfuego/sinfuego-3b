@@ -3,7 +3,7 @@ import hashlib
 import pandas as pd
 
 st.header("Welcome to SHA1!🔐")
-st.write('SHA1')
+st.write('In cryptography, SHA-1 (Secure Hash Algorithm 1) is a hash function which takes an input and produces a 160-bit (20-byte) hash value known as a message digest – typically rendered as 40 hexadecimal digits. It was designed by the United States National Security Agency, and is a U.S. Federal Information Processing Standard.')
 
 def compute_sha1(input_string):
     # Create a SHA-1 hash object
@@ -17,12 +17,18 @@ def compute_sha1(input_string):
 
     return hex_digest
 
+option = st.selectbox(
+    'Please choose content type',
+    ('Text', 'File'))
+
+st.write('You selected:', option)
+
 genre = st.radio(
     "Choose Input",
     ["Text", "File"])
 
 if genre == 'Text':
-    st.write('You selected Text.')
+    st.write('Input Your Text.')
     input_string = st.text_area('Plaintext', placeholder="Input Text...")
     button = st.button("Submit", type="primary")
 
