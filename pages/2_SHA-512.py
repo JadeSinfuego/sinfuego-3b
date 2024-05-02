@@ -37,7 +37,7 @@ if genre == 'Text':
     if button:
         if input_string:  # Check if input_string is not empty
             st.write("Input Text:", input_string)
-            sha512_hash = compute_sha512(input_string)
+            sha512_hash = sha512_hash(input_string)
             st.write("SHA-512 hash of '{}' is: {}".format(input_string, sha512_hash))
         else:
             st.warning("Please input text for SHA-512 hash to work!")
@@ -51,7 +51,7 @@ elif genre == 'File':
         st.write("File contents:", file_contents)
 
         # Compute SHA-512 hash of file contents
-        sha512_hash = compute_sha512(file_contents)
+        sha512_hash = sha512_hash(file_contents)
         st.write("SHA-512 hash of file contents:", sha512_hash)
         
 else:

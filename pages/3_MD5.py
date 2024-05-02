@@ -37,7 +37,7 @@ if genre == 'Text':
     if button:
         if input_string:  # Check if input_string is not empty
             st.write("Input Text:", input_string)
-            md5_hash = compute_md5(input_string)
+            md5_hash = md5_hash(input_string)
             st.write("MD5 hash of '{}' is: {}".format(input_string, md5_hash))
         else:
             st.warning("Please input text for MD5 hash to work!")
@@ -51,7 +51,7 @@ elif genre == 'File':
         st.write("File contents:", file_contents)
 
         # Compute MD5 hash of file contents
-        md5_hash = compute_md5(file_contents)
+        md5_hash = md5_hash(file_contents)
         st.write("MD5 hash of file contents:", md5_hash)
         
 else:
