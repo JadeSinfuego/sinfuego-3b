@@ -1,0 +1,30 @@
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+
+# AES Encryption
+
+def encrypt_text_aes(plaintext, key):
+    cipher = AES.new(key, AES.MODE_ECB)
+    ciphertext = cipher.encrypt(plaintext)
+    return ciphertext
+
+def decrypt_text_aes(ciphertext, key):
+    cipher = AES.new(key, AES.MODE_ECB)
+    plaintext = cipher.decrypt(ciphertext)
+    return plaintext
+
+def encrypt_file_aes(file_path, key):
+    with open(file_path, 'rb') as f:
+        plaintext = f.read()
+    cipher = AES.new(key, AES.MODE_ECB)
+    ciphertext = cipher.encrypt(plaintext)
+    with open(file_path + '.enc', 'wb') as f:
+        f.write(ciphertext)
+
+def decrypt_file_aes(file_path, key):
+    with open(file_path, 'rb') as f:
+        ciphertext = f.read()
+    cipher = AES.new(key, AES.MODE_ECB)
+    plaintext = cipher.decrypt(ciphertext)
+    with open(file_path[:-4], 'wb') as f:
+        f.write(plaintext)
