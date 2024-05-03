@@ -1,4 +1,6 @@
 import streamlit as st
+import sys
+sys.path.append("/path/to/pycryptodome")
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 import base64
