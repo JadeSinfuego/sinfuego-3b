@@ -1,6 +1,7 @@
 import streamlit as st
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
+import base64
 
 # AES Encryption
 
@@ -38,8 +39,12 @@ def decrypt_file_aes(file_path, key):
         f.write(plaintext)
 
 aes_key = get_random_bytes(16)  # Generate a 128-bit AES key
-plaintext = ''
+plaintext = b'Hello World!'  # Provide a non-empty plaintext
 encrypted_text_aes = encrypt_text_aes(plaintext, aes_key)
 decrypted_text_aes = decrypt_text_aes(encrypted_text_aes, aes_key)
-st.write("AES Encrypted Text:", encrypted_text_aes)
-st.write("AES Decrypted Text:", decrypted_text_aes)      
+
+# Encode ciphertext as Base64 for display in Streamlit
+encoded_ciphertext = base64.b64encode(encrypted_text_aes).decode('utf-8')
+
+st.write("AES Encrypted Text:", encoded_ciphertext)
+st.write("AES Decrypted Text:", decrypted_text_aes)
