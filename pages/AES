@@ -5,8 +5,15 @@ from Crypto.Random import get_random_bytes
 
 def encrypt_text_aes(plaintext, key):
     cipher = AES.new(key, AES.MODE_ECB)
-    ciphertext = cipher.encrypt(plaintext)
+    # Add padding to the plaintext to make it align with the block size
+    padded_plaintext = _pad(plaintext, AES.block_size)
+    ciphertext = cipher.encrypt(padded_plaintext)
     return ciphertext
+
+def _pad(data, block_size):
+    padding_length = block_size - (len(data) % block_size)
+    padding = bytes([padding_length]) * padding_length
+    return data + padding
 
 def decrypt_text_aes(ciphertext, key):
     cipher = AES.new(key, AES.MODE_ECB)
@@ -28,3 +35,10 @@ def decrypt_file_aes(file_path, key):
     plaintext = cipher.decrypt(ciphertext)
     with open(file_path[:-4], 'wb') as f:
         f.write(plaintext)
+
+aes_key = get_random_bytes(16)  # Generate a 128-bit AES key
+plaintext = b'Hello, World!'
+encrypted_text_aes = encrypt_text_aes(plaintext, aes_key)
+decrypted_text_aes = decrypt_text_aes(encrypted_text_aes, aes_key)
+print("AES Encrypted Text:", encrypted_text_aes)
+print("AES Decrypted Text:", decrypted_text_aes)      
