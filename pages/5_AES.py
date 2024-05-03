@@ -1,3 +1,4 @@
+import streamlit as st
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 
@@ -40,5 +41,5 @@ aes_key = get_random_bytes(16)  # Generate a 128-bit AES key
 plaintext = b'Hello, World!'
 encrypted_text_aes = encrypt_text_aes(plaintext, aes_key)
 decrypted_text_aes = decrypt_text_aes(encrypted_text_aes, aes_key)
-print("AES Encrypted Text:", encrypted_text_aes)
-print("AES Decrypted Text:", decrypted_text_aes)      
+st.write("AES Encrypted Text:", encrypted_text_aes)
+st.write("AES Decrypted Text:", decrypted_text_aes)      
