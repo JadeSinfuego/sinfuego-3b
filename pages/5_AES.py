@@ -38,7 +38,7 @@ def decrypt_file_aes(file_path, key):
         f.write(plaintext)
 
 aes_key = get_random_bytes(16)  # Generate a 128-bit AES key
-plaintext = b'Hello, World!'
+plaintext = ''
 encrypted_text_aes = encrypt_text_aes(plaintext, aes_key)
 decrypted_text_aes = decrypt_text_aes(encrypted_text_aes, aes_key)
 st.write("AES Encrypted Text:", encrypted_text_aes)
