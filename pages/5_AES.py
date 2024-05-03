@@ -1,5 +1,5 @@
 import streamlit as st
-from Crypto.Cipher import AES
+from Crypto import AES
 from Crypto.Random import get_random_bytes
 import base64
 
