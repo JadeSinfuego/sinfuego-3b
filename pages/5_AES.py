@@ -4,6 +4,7 @@ from Crypto.Random import get_random_bytes
 import base64
 
 # AES Encryption
+st.header("Welcome to SHA-512!🔐")
 
 def encrypt_text_aes(plaintext, key):
     cipher = AES.new(key, AES.MODE_ECB)
