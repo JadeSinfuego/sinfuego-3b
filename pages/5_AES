@@ -52,4 +52,4 @@ if decrypt_button:
         decrypted_message = decrypt_message(iv, ct, key)
         st.write("Decrypted message:", decrypted_message)
     else:
-        st.warning("Please enter IV and ciphertext.")
+        st.warning("Please enter IV and ciphertext")
