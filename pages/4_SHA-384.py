@@ -2,7 +2,7 @@ import hashlib
 import streamlit as st
 
 st.header("Welcome to SHA-384!🔐")
-st.write("")
+st.write("SHA384 Encrypt/Decrypt is a free online tool for generating SHA384 hashes from strings and decrypting SHA384 hashes to strings.")
 def sha384_hash(input_string):
     # Encode the input string to bytes
     input_bytes = input_string.encode()
