@@ -1,51 +1,55 @@
 import streamlit as st
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
+from Crypto.Util.Padding import pad, unpad
 import base64
 
-# AES Encryption
-st.header("Welcome to SHA-512!🔐")
+# AES encryption function
+def encrypt_message(message, key):
+    cipher = AES.new(key, AES.MODE_CBC)
+    ct_bytes = cipher.encrypt(pad(message.encode(), AES.block_size))
+    iv = base64.b64encode(cipher.iv).decode('utf-8')
+    ct = base64.b64encode(ct_bytes).decode('utf-8')
+    return iv, ct
 
-def encrypt_text_aes(plaintext, key):
-    cipher = AES.new(key, AES.MODE_ECB)
-    # Add padding to the plaintext to make it align with the block size
-    padded_plaintext = _pad(plaintext, AES.block_size)
-    ciphertext = cipher.encrypt(padded_plaintext)
-    return ciphertext
+# AES decryption function
+def decrypt_message(iv, ct, key):
+    iv = base64.b64decode(iv)
+    ct = base64.b64decode(ct)
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    pt = unpad(cipher.decrypt(ct), AES.block_size).decode('utf-8')
+    return pt
 
-def _pad(data, block_size):
-    padding_length = block_size - (len(data) % block_size)
-    padding = bytes([padding_length]) * padding_length
-    return data + padding
+# Streamlit UI
+st.title("AES Encryption and Decryption")
 
-def decrypt_text_aes(ciphertext, key):
-    cipher = AES.new(key, AES.MODE_ECB)
-    plaintext = cipher.decrypt(ciphertext)
-    return plaintext
+# Encryption section
+st.header("Encryption")
+message = st.text_input("Enter message to encrypt:")
+encrypt_button = st.button("Encrypt")
 
-def encrypt_file_aes(file_path, key):
-    with open(file_path, 'rb') as f:
-        plaintext = f.read()
-    cipher = AES.new(key, AES.MODE_ECB)
-    ciphertext = cipher.encrypt(plaintext)
-    with open(file_path + '.enc', 'wb') as f:
-        f.write(ciphertext)
+# Decryption section
+st.header("Decryption")
+iv = st.text_input("Enter IV:")
+ct = st.text_input("Enter ciphertext:")
+decrypt_button = st.button("Decrypt")
 
-def decrypt_file_aes(file_path, key):
-    with open(file_path, 'rb') as f:
-        ciphertext = f.read()
-    cipher = AES.new(key, AES.MODE_ECB)
-    plaintext = cipher.decrypt(ciphertext)
-    with open(file_path[:-4], 'wb') as f:
-        f.write(plaintext)
+# AES key (fixed for demonstration purposes, in practice generate a secure random key)
+key = get_random_bytes(16)
 
-aes_key = get_random_bytes(16)  # Generate a 128-bit AES key
-plaintext = b'Hello World'  # Provide a non-empty plaintext
-encrypted_text_aes = encrypt_text_aes(plaintext, aes_key)
-decrypted_text_aes = decrypt_text_aes(encrypted_text_aes, aes_key)
+# Encrypt button event handler
+if encrypt_button:
+    if message:
+        iv, ct = encrypt_message(message, key)
+        st.write("IV:", iv)
+        st.write("Ciphertext:", ct)
+    else:
+        st.warning("Please enter a message to encrypt.")
 
-# Encode ciphertext as Base64 for display in Streamlit
-encoded_ciphertext = base64.b64encode(encrypted_text_aes).decode('utf-8')
-
-st.write("AES Encrypted Text:", encoded_ciphertext)
-st.write("AES Decrypted Text:", decrypted_text_aes)
+# Decrypt button event handler
+if decrypt_button:
+    if iv and ct:
+        decrypted_message = decrypt_message(iv, ct, key)
+        st.write("Decrypted message:", decrypted_message)
+    else:
+        st.warning("Please enter IV and ciphertext.")
