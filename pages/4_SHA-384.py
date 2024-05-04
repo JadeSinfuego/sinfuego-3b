@@ -2,7 +2,7 @@ import hashlib
 import streamlit as st
 
 st.header("Welcome to SHA-384!🔐")
-
+st.write("")
 def sha384_hash(input_string):
     # Encode the input string to bytes
     input_bytes = input_string.encode()
