@@ -53,3 +53,29 @@ if decrypt_button:
         st.write("Decrypted message:", decrypted_message)
     else:
         st.warning("Please enter IV and ciphertext")
+
+genre = st.radio(
+    "Choose Input:",
+    ["Text", "File"])
+
+if genre == 'Text':
+    st.write('Input Your Text.')
+    input_string = st.text_area('Plaintext', placeholder="Input Text...")
+    button = st.button("Submit", type="primary")
+
+    if button:
+        if input_string:  # Check if input_string is not empty
+            st.write("Input Text:", input_string)
+        else:
+            st.warning("")
+
+elif genre == 'File':
+    st.write('Enter Your Selected File.')
+    uploaded_file = st.file_uploader("Choose a file")
+    if uploaded_file is not None:
+        # Read file contents as string
+        file_contents = uploaded_file.getvalue().decode("utf-8")
+        st.write("File contents:", file_contents)
+        
+else:
+    st.write("Please choose.")
